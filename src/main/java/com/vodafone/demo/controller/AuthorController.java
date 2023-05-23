@@ -16,7 +16,7 @@ public class AuthorController {
     }
 
     @GetMapping(value = "/authors/{id}")
-    public ResponseEntity<Author> getAuthorById(@PathVariable(name = "id") Integer id){
+    public ResponseEntity<Author> getAuthorById(@PathVariable(name = "id", required = false) Integer id){
         return ResponseEntity.ok(authorService.getAuthorById(id));
     }
 }
