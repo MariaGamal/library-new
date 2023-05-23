@@ -2,7 +2,6 @@ package com.vodafone.demo.service;
 
 import com.vodafone.demo.controller.ArticlesController;
 import com.vodafone.demo.controller.AuthorController;
-import com.vodafone.demo.errorhandling.NotFoundException;
 import com.vodafone.demo.model.Article;
 import com.vodafone.demo.model.Links;
 import com.vodafone.demo.repository.ArticleRepository;
@@ -42,8 +41,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article addArticle(Article article) {
-        return this.repository.save(article);
-        // add links
+        Article updatedArticle = addLinks(article);
+        return this.repository.save(updatedArticle);
     }
 
     @Override
@@ -53,12 +52,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article updateArticle(Integer id, Article article) {
-        Article article1 = this.repository.findById(id).orElse(null);
-        if (article1 == null){
-            throw new NotFoundException(String.format("The Article with id '%s' was not found", id));
-        }
-        addLinks(article1);
-        return this.repository.save(article);
+        deleteArticle(id);
+        article.setId(id);
+        return addArticle(article);
     }
 
     private Article addLinks(Article article){

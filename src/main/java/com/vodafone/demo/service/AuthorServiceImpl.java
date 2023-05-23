@@ -21,4 +21,9 @@ public class AuthorServiceImpl implements AuthorService {
         Optional<Author> author = this.repository.findById(id);
         return author.orElse(null);
     }
+
+    @Override
+    public Author addAuthor(Author author) {
+        return this.repository.save(author);
+    }
 }

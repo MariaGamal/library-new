@@ -5,4 +5,6 @@ import com.vodafone.demo.model.Author;
 public interface AuthorService {
     Author
     getAuthorById(Integer id);
+
+    Author addAuthor(Author author);
 }

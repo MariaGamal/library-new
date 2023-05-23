@@ -1,11 +1,11 @@
 package com.vodafone.demo.controller;
 
+import com.vodafone.demo.model.Article;
 import com.vodafone.demo.model.Author;
 import com.vodafone.demo.service.AuthorService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AuthorController {
@@ -18,5 +18,11 @@ public class AuthorController {
     @GetMapping(value = "/authors/{id}")
     public ResponseEntity<Author> getAuthorById(@PathVariable(name = "id", required = false) Integer id){
         return ResponseEntity.ok(authorService.getAuthorById(id));
+    }
+
+    @PostMapping(value = "/authors", produces = {"application/json"}, consumes = {"application/json"})
+    public ResponseEntity<Author> addAuthor(@RequestBody Author author) {
+        author = authorService.addAuthor(author);
+        return new ResponseEntity<>(author, HttpStatus.CREATED);
     }
 }
