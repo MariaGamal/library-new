@@ -145,6 +145,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "add author",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":1,\n    \"name\": \"Maria\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/authors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"authors"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
