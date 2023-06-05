@@ -9,8 +9,6 @@ import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
-
-    @Autowired
     private final AuthorRepository repository;
 
     public AuthorServiceImpl(AuthorRepository authorRepository){

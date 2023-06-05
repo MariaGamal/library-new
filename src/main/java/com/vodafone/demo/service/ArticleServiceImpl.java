@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -47,14 +48,22 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void deleteArticle(Integer id) {
-        this.repository.deleteById(id);
+        if (this.repository.existsById(id)){
+            this.repository.deleteById(id);
+        } else {
+            throw new NoSuchElementException("No article with this ID is found in DB");
+        }
     }
 
     @Override
     public Article updateArticle(Integer id, Article article) {
-        deleteArticle(id);
-        article.setId(id);
-        return addArticle(article);
+        Article dbArticle = this.repository.findById(id).orElse(null);
+        if (dbArticle != null){
+           return this.repository.save(article
+           );
+        } else {
+            throw new NoSuchElementException("No article with this ID is found in DB");
+        }
     }
 
     private Article addLinks(Article article){

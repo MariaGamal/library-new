@@ -1,7 +1,9 @@
 package com.vodafone.demo.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -24,6 +26,11 @@ public class Article {
 //    @OneToMany
     @Transient
     private List<Links> links;
+
+    public  Article(){}
+
+    public Article(int i, String article1, String maria, int i1) {
+    }
 }
 
 
